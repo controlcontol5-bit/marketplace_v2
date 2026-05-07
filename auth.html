@@ -152,7 +152,8 @@
     </div>
 
     <script>
-        function switchTab(type) {
+        // Pastikan fungsi tersedia secara global
+        window.switchTab = function(type) {
             const loginTab = document.getElementById('login-tab');
             const registerTab = document.getElementById('register-tab');
             const loginForm = document.getElementById('login-form');
@@ -169,49 +170,74 @@
                 registerForm.style.display = 'block';
                 loginForm.style.display = 'none';
             }
-        }
+        };
 
-        function handleRegister() {
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const pass = document.getElementById('regPass').value;
+        window.handleRegister = function() {
+            const btn = event.target;
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const pass = document.getElementById('regPass').value.trim();
             
-            // Validasi Sederhana
             if(!name || !email || !pass) {
-                alert('Peringatan: Harap isi Nama, Email, dan Kata Sandi!');
+                alert('Peringatan: Semua kolom (Nama, Email, Password) wajib diisi!');
                 return;
             }
 
-            if(!email.includes('@')) {
-                alert('Peringatan: Format email tidak valid! Gunakan tanda @ (contoh: nama@mail.com)');
+            if(!email.includes('@') || !email.includes('.')) {
+                alert('Peringatan: Format email tidak valid! Gunakan format nama@mail.com');
                 return;
             }
 
-            if(pass.length < 5) {
-                alert('Peringatan: Kata sandi terlalu pendek! Minimal 5 karakter.');
-                return;
+            btn.innerText = "Sedang Memproses...";
+            btn.disabled = true;
+
+            try {
+                // Simpan data
+                const userData = { 
+                    name: name, 
+                    email: email, 
+                    role: 'buyer', 
+                    pass: pass,
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Simpan ke localStorage
+                localStorage.setItem('nexmart_user', JSON.stringify(userData));
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                setTimeout(() => {
+                    alert('SELAMAT! Akun ' + name + ' berhasil dibuat. Klik OK untuk masuk ke NexMart.');
+                    window.location.href = 'index.html';
+                }, 800);
+            } catch (err) {
+                alert('Terjadi kesalahan sistem. Silakan coba lagi.');
+                btn.innerText = "Buat Akun Sekarang";
+                btn.disabled = false;
             }
+        };
 
-            // Simpan data sebagai 'buyer' secara default
-            const userData = { name, email, role: 'buyer', pass };
-            localStorage.setItem('nexmart_user', JSON.stringify(userData));
-            
-            alert('Selamat! Akun NexMart Anda berhasil dibuat.');
-            window.location.href = 'index.html';
-        }
-
-        function handleLogin() {
-            const user = document.getElementById('loginUser').value;
-            const pass = document.getElementById('loginPass').value;
+        window.handleLogin = function() {
+            const btn = event.target;
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
             const storedUser = JSON.parse(localStorage.getItem('nexmart_user'));
 
-            if (storedUser && (user === storedUser.email || user === storedUser.name) && pass === storedUser.pass) {
-                alert('Login Berhasil! Selamat datang di NexMart.');
-                window.location.href = 'index.html';
-            } else {
-                alert('Eror: Email atau kata sandi yang Anda masukkan salah!');
+            if (!user || !pass) {
+                alert('Peringatan: Masukkan Email dan Kata Sandi Anda!');
+                return;
             }
-        }
+
+            if (storedUser && (user === storedUser.email || user === storedUser.name) && pass === storedUser.pass) {
+                btn.innerText = "Membuka Akun...";
+                localStorage.setItem('isLoggedIn', 'true');
+                setTimeout(() => {
+                    alert('Login Berhasil! Selamat datang kembali.');
+                    window.location.href = 'index.html';
+                }, 500);
+            } else {
+                alert('Eror: Email atau kata sandi salah. Silakan cek kembali!');
+            }
+        };
     </script>
 </body>
 </html>
