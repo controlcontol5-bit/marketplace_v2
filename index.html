@@ -18,7 +18,7 @@
         <div class="container nav-container">
             <a href="index.html" class="logo gradient-text">NexMart</a>
             <ul class="nav-links">
-                <li><a href="#">Beranda</a></li>
+                <li><a href="index.html">Beranda</a></li>
                 <li><a href="#">Kategori</a></li>
                 <li><a href="seller-dashboard.html">Jadi Penjual</a></li>
                 <li><a href="admin-panel.html">Admin</a></li>
@@ -28,10 +28,42 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-count">0</span>
                 </a>
-                <a href="auth.html" class="btn btn-primary">Masuk</a>
+                <a href="auth.html" id="auth-btn" class="btn btn-primary">Masuk</a>
             </div>
         </div>
     </nav>
+
+    <!-- Floating Menu -->
+    <div class="floating-menu">
+        <a href="index.html" class="floating-btn">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="#" class="floating-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Keranjang Belanja</span>
+        </a>
+        <a href="#" class="floating-btn">
+            <i class="fa-solid fa-receipt"></i>
+            <span>Riwayat Transaksi</span>
+        </a>
+        <a href="#" class="floating-btn">
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Akun & Keamanan</span>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authBtn = document.getElementById('auth-btn');
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                authBtn.innerText = "Mulai Berdagang";
+                authBtn.href = "seller-dashboard.html";
+            }
+        });
+    </script>
 
     <main>
         <section class="hero">
