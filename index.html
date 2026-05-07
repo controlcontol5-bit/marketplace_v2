@@ -18,52 +18,20 @@
         <div class="container nav-container">
             <a href="index.html" class="logo gradient-text">NexMart</a>
             <ul class="nav-links">
-                <li><a href="index.html">Beranda</a></li>
+                <li><a href="#">Beranda</a></li>
                 <li><a href="#">Kategori</a></li>
                 <li><a href="seller-dashboard.html">Jadi Penjual</a></li>
                 <li><a href="admin-panel.html">Admin</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="#" class="btn btn-outline" id="cart-btn">
+            <div class="nav-auth">
+                <a href="cart.html" class="cart-btn">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-count">0</span>
                 </a>
-                <a href="auth.html" id="auth-btn" class="btn btn-primary">Masuk</a>
+                <a href="auth.html" id="main-auth-btn" class="btn btn-primary">Masuk</a>
             </div>
         </div>
     </nav>
-
-    <!-- Floating Menu -->
-    <div class="floating-menu">
-        <a href="index.html" class="floating-btn">
-            <i class="fa-solid fa-house"></i>
-            <span>Beranda</span>
-        </a>
-        <a href="#" class="floating-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Keranjang Belanja</span>
-        </a>
-        <a href="#" class="floating-btn">
-            <i class="fa-solid fa-receipt"></i>
-            <span>Riwayat Transaksi</span>
-        </a>
-        <a href="#" class="floating-btn">
-            <i class="fa-solid fa-user-shield"></i>
-            <span>Akun & Keamanan</span>
-        </a>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const authBtn = document.getElementById('auth-btn');
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            
-            if (isLoggedIn === 'true') {
-                authBtn.innerText = "Mulai Berdagang";
-                authBtn.href = "seller-dashboard.html";
-            }
-        });
-    </script>
 
     <main>
         <section class="hero">
@@ -132,6 +100,41 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <!-- Floating Action Buttons (FAB) -->
+    <div class="fab-container">
+        <a href="index.html" class="fab-btn">
+            <i class="fa-solid fa-house"></i>
+            <span class="fab-label">Home</span>
+        </a>
+        <a href="cart.html" class="fab-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="fab-label">Keranjang</span>
+        </a>
+        <a href="transactions.html" class="fab-btn">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span class="fab-label">Transaksi</span>
+        </a>
+        <a href="settings.html" class="fab-btn">
+            <i class="fa-solid fa-user-gear"></i>
+            <span class="fab-label">Akun & Keamanan</span>
+        </a>
+    </div>
+
+    <script>
+        // Check Login Status for Navbar
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const authBtn = document.getElementById('main-auth-btn');
+            
+            if (isLoggedIn) {
+                const userData = JSON.parse(localStorage.getItem('nexmart_user'));
+                authBtn.innerText = 'Mulai Berdagang';
+                authBtn.href = 'seller-dashboard.html';
+                
+                // Jika sudah login, beri sambutan kecil di konsol
+                console.log('Selamat datang kembali, ' + userData.name);
+            }
+        });
+    </script>
 </body>
 </html>
