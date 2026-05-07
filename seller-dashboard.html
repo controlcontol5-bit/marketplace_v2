@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard | NexMart</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        .sidebar {
+            padding: 20px;
+            border-right: 1px solid var(--glass-border);
+        }
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 30px;
+        }
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: var(--glass);
+            color: var(--primary);
+        }
+        .main-content {
+            padding: 40px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            padding: 25px;
+        }
+        .stat-card h4 {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .comparison-table th {
+            color: var(--text-muted);
+        }
+        .highlight-row {
+            background: rgba(0, 242, 255, 0.05);
+            color: var(--primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass">
+        <div class="container nav-container">
+            <a href="index.html" class="logo gradient-text">NexMart Seller</a>
+            <div class="nav-actions">
+                <span style="margin-right: 15px;">Halo, <strong id="seller-name">Toko Jaya</strong></span>
+                <a href="#" class="btn btn-outline"><i class="fa-solid fa-bell"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fa-solid fa-chart-line"></i> Ringkasan</a></li>
+                <li><a href="#"><i class="fa-solid fa-box"></i> Produk Saya</a></li>
+                <li><a href="#"><i class="fa-solid fa-list-check"></i> Pesanan</a></li>
+                <li><a href="#"><i class="fa-solid fa-wallet"></i> Saldo & Penarikan</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Pengaturan Toko</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header style="margin-bottom: 30px;">
+                <h2>Statistik <span class="gradient-text">Penjualan</span></h2>
+                <p style="color: var(--text-muted);">Pantau pertumbuhan bisnis Anda dengan komisi terendah.</p>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <h4>Total Pendapatan</h4>
+                    <div class="value">Rp 12.450.000</div>
+                    <p style="color: #10b981; font-size: 0.8rem; margin-top: 5px;"><i class="fa-solid fa-arrow-up"></i> +12% dari bulan lalu</p>
+                </div>
+                <div class="stat-card glass">
+                    <h4>Pesanan Baru</h4>
+                    <div class="value">24</div>
+                    <p style="color: var(--primary); font-size: 0.8rem; margin-top: 5px;">Perlu diproses segera</p>
+                </div>
+                <div class="stat-card glass">
+                    <h4>Total Penghematan Komisi</h4>
+                    <div class="value" style="color: var(--accent);">Rp 1.250.000</div>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px;">Dibanding platform kompetitor</p>
+                </div>
+            </div>
+
+            <section class="glass" style="padding: 30px;">
+                <h3>Perbandingan <span class="gradient-text">Biaya Komisi</span></h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Lihat seberapa banyak Anda berhemat di NexMart.</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Biaya Admin/Komisi</th>
+                            <th>Potongan per Transaksi (Rp 100rb)</th>
+                            <th>Keuntungan Bersih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Platform "O"</td>
+                            <td>8% - 12%</td>
+                            <td>Rp 12.000</td>
+                            <td>Rp 88.000</td>
+                        </tr>
+                        <tr>
+                            <td>Platform "T"</td>
+                            <td>6.5% - 10%</td>
+                            <td>Rp 10.000</td>
+                            <td>Rp 90.000</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>NexMart (Kita)</td>
+                            <td>1% - 2.5%</td>
+                            <td>Rp 2.500</td>
+                            <td>Rp 97.500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section style="margin-top: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>Daftar Produk</h3>
+                    <button class="btn btn-primary" onclick="openModal()"><i class="fa-solid fa-plus"></i> Tambah Produk</button>
+                </div>
+                <div id="product-list" class="glass" style="padding: 20px;">
+                    <!-- Placeholder if empty -->
+                    <div id="empty-state" style="text-align: center; color: var(--text-muted);">
+                        <i class="fa-solid fa-box-open" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i>
+                        <p>Anda belum menambahkan produk baru hari ini.</p>
+                    </div>
+                    <div id="seller-products" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Tambah Produk -->
+    <div id="product-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+        <div class="glass" style="width: 100%; max-width: 500px; padding: 30px; position: relative;">
+            <button onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; cursor: pointer; font-size: 1.5rem;"><i class="fa-solid fa-times"></i></button>
+            <h3 style="margin-bottom: 20px;">Tambah <span class="gradient-text">Produk Baru</span></h3>
+            
+            <div class="form-group">
+                <label>Nama Produk</label>
+                <input type="text" id="p-name" placeholder="Contoh: Sepatu Sneaker Pro">
+            </div>
+            <div class="form-group">
+                <label>Harga (Rp)</label>
+                <input type="number" id="p-price" oninput="calculateProfit()" placeholder="0">
+            </div>
+            <div style="background: rgba(0, 242, 255, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px dashed var(--primary);">
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Estimasi Keuntungan (Komisi 1%):</p>
+                <h4 id="profit-calc" style="color: var(--primary);">Rp 0</h4>
+            </div>
+            <div class="form-group">
+                <label>Kategori</label>
+                <select id="p-cat" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--glass-border); border-radius: 8px; color: white;">
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Kebutuhan Rumah">Kebutuhan Rumah</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="saveProduct()">Simpan Produk</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+        function calculateProfit() {
+            const price = document.getElementById('p-price').value || 0;
+            const commission = price * 0.01; // 1%
+            const profit = price - commission;
+            document.getElementById('profit-calc').innerText = `Rp ${profit.toLocaleString('id-ID')}`;
+        }
+        function saveProduct() {
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const cat = document.getElementById('p-cat').value;
+
+            if(!name || !price) return alert('Mohon isi nama dan harga!');
+
+            const product = { name, price: parseInt(price), cat };
+            let myProducts = JSON.parse(localStorage.getItem('seller_products')) || [];
+            myProducts.push(product);
+            localStorage.setItem('seller_products', JSON.stringify(myProducts));
+
+            renderSellerProducts();
+            closeModal();
+            alert('Produk berhasil ditambahkan!');
+        }
+
+        function renderSellerProducts() {
+            const list = document.getElementById('seller-products');
+            const empty = document.getElementById('empty-state');
+            let myProducts = JSON.parse(localStorage.getItem('seller_products')) || [];
+
+            if(myProducts.length > 0) {
+                empty.style.display = 'none';
+                list.innerHTML = myProducts.map(p => `
+                    <div class="glass animate-fade" style="padding: 15px; text-align: center;">
+                        <div style="width: 100%; aspect-ratio: 1/1; background: #2d3748; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-image" style="font-size: 2rem; color: #4a5568;"></i>
+                        </div>
+                        <h4 style="font-size: 0.9rem;">${p.name}</h4>
+                        <p style="color: var(--accent); font-weight: 700;">Rp ${p.price.toLocaleString('id-ID')}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Load existing
+        window.onload = renderSellerProducts;
+    </script>
+</body>
+</html>
